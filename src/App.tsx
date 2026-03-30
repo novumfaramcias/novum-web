@@ -106,7 +106,7 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a href="#sucursales" className="bg-brand-secondary text-white px-10 py-5 rounded-xl font-bold hover:scale-105 transition-all text-center">
-              Explorar Sucursales
+              ¿Dónde estamos?
             </a>
           </div>
         </motion.div>
@@ -124,24 +124,21 @@ const Sucursales = () => {
       fullName: "Farmacia Novafarma",
       address: "Quintana y Basilico, Villa Italia",
       whatsapp: "https://wa.me/5492494272729",
-      logo: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/logo-original-591e34.svg",
-      image: "https://images.unsplash.com/photo-1587854692152-cbe660dbbb88?auto=format&fit=crop&q=80&w=1000"
+      image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/novum1.jpeg"
     },
     {
       name: "Piedra Que Late",
       fullName: "Farmacia Piedra Que Late",
       address: "Sanllorenti 783, Barrio Procrear",
       whatsapp: "https://wa.me/5492494370055",
-      logo: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/piedra-que-late-8be7d7.svg",
-      image: "https://images.unsplash.com/photo-1631549916768-4119b295f926?auto=format&fit=crop&q=80&w=1000"
+      image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/novum2.jpeg"
     },
     {
       name: "Kuala Lumpur",
       fullName: "Farmacia Kuala Lumpur",
       address: "Pinto y 14 de Julio, Centro",
       whatsapp: "https://wa.me/5492494288629",
-      logo: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/kuala-lumpur-dcb5d4.svg",
-      image: "https://images.unsplash.com/photo-1576602976047-174e57a47881?auto=format&fit=crop&q=80&w=1000"
+      image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/novum3.jpeg"
     },
   ];
 
