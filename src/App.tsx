@@ -12,16 +12,52 @@ import {
   Linkedin,
   Menu,
   X,
-  Heart,
-  Leaf,
-  ShieldCheck,
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight
+  Heart, 
+  Leaf, 
+  ShieldCheck, 
+  ArrowRight, 
+  ChevronLeft, 
+  ChevronRight 
 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
-// --- COMPONENTES ---
+// --- COMPONENTE PRINCIPAL ---
+
+export default function App() {
+  return (
+    <>
+      {/* 1. FUERZA LA IMPORTACIÓN DE POPPINS PARA MÓVILES */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+        
+        * {
+          font-family: 'Poppins', sans-serif !important;
+        }
+        
+        html, body {
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden;
+          scroll-behavior: smooth;
+        }
+      `}} />
+
+      <div className="selection:bg-brand-secondary selection:text-white bg-white min-h-screen">
+        <Navbar />
+        <main>
+          <Hero />
+          <Sucursales />
+          <GaleriaSlider />
+          <Valores />
+          <Contacto />
+        </main>
+        <Footer />
+      </div>
+    </>
+  );
+}
+
+// --- SUB-COMPONENTES ---
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,7 +72,7 @@ const Navbar = () => {
   const logoUrl = "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/novumfarmacias-086319.svg";
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 !font-['Poppins'] ${isScrolled ? "bg-white/95 backdrop-blur-md py-3 shadow-md" : "bg-transparent py-6"}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-white/95 backdrop-blur-md py-3 shadow-md" : "bg-transparent py-6"}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#inicio" className="w-40 md:w-52">
           <img src={logoUrl} alt="Novum Farmacias" className={`w-full h-auto object-contain ${!isScrolled ? "brightness-0 invert" : ""}`} />
@@ -55,9 +91,10 @@ const Navbar = () => {
           {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
+
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="md:hidden bg-white border-b absolute top-full left-0 w-full !font-['Poppins'] shadow-2xl z-50">
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="md:hidden bg-white border-b absolute top-full left-0 w-full shadow-2xl z-50">
             <div className="px-6 py-10 flex flex-col space-y-6 text-center">
               <a href="#inicio" onClick={() => setIsMenuOpen(false)} className="text-brand-primary font-bold text-xl">Inicio</a>
               <a href="#sucursales" onClick={() => setIsMenuOpen(false)} className="text-brand-primary font-bold text-xl">Sucursales</a>
@@ -72,7 +109,7 @@ const Navbar = () => {
 };
 
 const Hero = () => (
-  <section id="inicio" className="relative h-screen flex items-center overflow-hidden !font-['Poppins']">
+  <section id="inicio" className="relative h-screen flex items-center overflow-hidden">
     <div className="absolute inset-0 z-0">
       <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&q=80&w=2000" alt="Fondo" className="w-full h-full object-cover" />
       <div className="absolute inset-0 bg-brand-primary/80 mix-blend-multiply" />
@@ -83,7 +120,7 @@ const Hero = () => (
           Te atendemos <br /> <span className="text-brand-secondary font-light italic">mejor.</span>
         </h1>
         <p className="text-xl md:text-2xl text-white/70 max-w-2xl mb-12 font-light">Cercanía y asesoramiento profesional en Tandil.</p>
-        <a href="#sucursales" className="inline-block bg-brand-secondary text-white px-10 py-5 rounded-xl font-bold hover:scale-105 transition-all">¿Dónde estamos?</a>
+        <a href="#sucursales" className="inline-block bg-brand-secondary text-white px-10 py-5 rounded-xl font-bold hover:scale-105 transition-all shadow-lg">¿Dónde estamos?</a>
       </motion.div>
     </div>
   </section>
@@ -98,7 +135,7 @@ const Sucursales = () => {
   ];
 
   return (
-    <section id="sucursales" className="py-20 md:py-32 bg-white !font-['Poppins']">
+    <section id="sucursales" className="py-20 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-12 text-center md:text-left">
           <span className="text-brand-secondary font-bold uppercase tracking-widest text-sm mb-4 block">Red de atención</span>
@@ -163,7 +200,7 @@ const GaleriaSlider = () => {
   }, [next]);
 
   return (
-    <section id="galeria" className="py-20 md:py-32 bg-brand-bg/20 !font-['Poppins']">
+    <section id="galeria" className="py-20 md:py-32 bg-brand-bg/20">
       <div className="max-w-7xl mx-auto px-6">
         <div className="relative h-[400px] md:h-[600px] rounded-[2rem] overflow-hidden shadow-2xl">
           <AnimatePresence mode="wait">
@@ -180,18 +217,18 @@ const GaleriaSlider = () => {
 };
 
 const Valores = () => (
-  <section id="valores" className="py-24 bg-brand-primary text-white !font-['Poppins']">
+  <section id="valores" className="py-24 bg-brand-primary text-white">
     <div className="max-w-7xl mx-auto px-6">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         <div>
           <span className="text-brand-secondary font-bold uppercase tracking-widest text-sm mb-4 block">Nuestra Esencia</span>
-          <h2 className="text-4xl md:text-7xl font-bold mb-8 tracking-tight">Valores que nos <br /><span className="italic font-light text-brand-secondary">definen.</span></h2>
+          <h2 className="text-4xl md:text-7xl font-bold mb-8 tracking-tight leading-[1.1]">Valores que <br /> nos definen.</h2>
           <p className="text-xl text-white/70 leading-relaxed underline decoration-brand-secondary underline-offset-8">Te atendemos mejor.</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-6">
           {[ { i: Heart, t: "Calidez" }, { i: Leaf, t: "Naturalidad" }, { i: MapPin, t: "Cercanía" }, { i: ShieldCheck, t: "Calidad" } ].map((v, idx) => (
-            <div key={idx} className="p-8 rounded-2xl bg-white/5 border border-white/10">
-              <v.i size={32} className="text-brand-secondary mb-4" />
+            <div key={idx} className="p-8 rounded-2xl bg-white/5 border border-white/10 group hover:bg-white/10 transition-colors">
+              <v.i size={32} className="text-brand-secondary mb-4 group-hover:scale-110 transition-transform" />
               <h4 className="text-lg font-bold uppercase">{v.t}</h4>
             </div>
           ))}
@@ -202,18 +239,18 @@ const Valores = () => (
 );
 
 const Contacto = () => (
-  <section id="contacto" className="py-24 bg-white text-center !font-['Poppins']">
+  <section id="contacto" className="py-24 bg-white text-center">
     <div className="max-w-5xl mx-auto px-6">
       <h2 className="text-6xl md:text-8xl font-bold mb-8 text-brand-primary tracking-tighter">¿Hablamos?</h2>
-      <p className="text-xl md:text-2xl text-brand-text/60 mb-16">Escribinos por WhatsApp y recibí asesoramiento inmediato.</p>
-      <div className="grid md:grid-cols-3 gap-4">
+      <p className="text-xl md:text-2xl text-brand-text/60 mb-16 font-light">Escribinos por WhatsApp y recibí asesoramiento inmediato.</p>
+      <div className="grid md:grid-cols-3 gap-6">
         {[ 
           { n: "Novafarma", l: "https://wa.me/5492494272729", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/logo-original-591e34.svg" },
           { n: "Piedra Que Late", l: "https://wa.me/5492494370055", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/piedra-que-late-8be7d7.svg" },
           { n: "Kuala Lumpur", l: "https://wa.me/5492494288629", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/kuala-lumpur-dcb5d4.svg" }
         ].map((sede) => (
-          <a key={sede.n} href={sede.l} target="_blank" rel="noreferrer" className="bg-brand-bg/50 p-10 rounded-2xl border-2 border-transparent hover:border-brand-secondary transition-all flex flex-col items-center gap-6">
-            <img src={sede.s} alt={sede.n} className="h-10 w-auto grayscale group-hover:grayscale-0" />
+          <a key={sede.n} href={sede.l} target="_blank" rel="noreferrer" className="bg-brand-bg/50 p-10 rounded-2xl border-2 border-transparent hover:border-brand-secondary transition-all flex flex-col items-center gap-6 shadow-sm group">
+            <img src={sede.s} alt={sede.n} className="h-10 w-auto grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all" />
             <span className="font-bold text-xs uppercase tracking-widest text-brand-primary">WhatsApp</span>
           </a>
         ))}
@@ -223,14 +260,14 @@ const Contacto = () => (
 );
 
 const Footer = () => (
-  <footer className="py-20 bg-brand-bg !font-['Poppins']">
+  <footer className="py-20 bg-brand-bg">
     <div className="max-w-7xl mx-auto px-6">
       <div className="flex flex-col md:flex-row justify-between items-center gap-12 mb-12">
         <img src="https://novumfarmacias.com.ar/wp-content/uploads/2026/03/novumfarmacias-086319.svg" alt="Novum" className="w-44" />
-        <div className="flex space-x-4">
-          <a href="https://www.instagram.com/novumfarmacias/?hl=es" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-brand-primary shadow-sm"><Instagram size={18} /></a>
-          <a href="https://www.facebook.com/novumfarmacias/" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-brand-primary shadow-sm"><Facebook size={18} /></a>
-          <a href="https://linkedin.com/company/novum-farmacias/" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-brand-primary shadow-sm"><Linkedin size={18} /></a>
+        <div className="flex space-x-5">
+          <a href="https://www.instagram.com/novumfarmacias/?hl=es" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-white flex items-center justify-center text-brand-primary shadow-sm hover:bg-brand-secondary hover:text-white transition-all"><Instagram size={20} /></a>
+          <a href="https://www.facebook.com/novumfarmacias/" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-white flex items-center justify-center text-brand-primary shadow-sm hover:bg-brand-secondary hover:text-white transition-all"><Facebook size={20} /></a>
+          <a href="https://linkedin.com/company/novum-farmacias/" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-white flex items-center justify-center text-brand-primary shadow-sm hover:bg-brand-secondary hover:text-white transition-all"><Linkedin size={20} /></a>
         </div>
       </div>
       <div className="text-center text-[10px] text-brand-primary/40 pt-8 border-t border-brand-primary/5 uppercase tracking-[0.3em] font-bold">
@@ -239,21 +276,3 @@ const Footer = () => (
     </div>
   </footer>
 );
-
-// --- APP PRINCIPAL ---
-
-export default function App() {
-  return (
-    <div className="!font-['Poppins'] selection:bg-brand-secondary selection:text-white bg-white min-h-screen">
-      <Navbar />
-      <main>
-        <Hero />
-        <Sucursales />
-        <GaleriaSlider />
-        <Valores />
-        <Contacto />
-      </main>
-      <Footer />
-    </div>
-  );
-}
