@@ -1,41 +1,78 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-@import "tailwindcss";
+const Hero = () => {
+  const redes = [
+    { i: Instagram, h: "https://www.instagram.com/novumfarmacias/?hl=es" },
+    { i: Facebook, h: "https://www.facebook.com/novumfarmacias/" },
+    { i: Linkedin, h: "https://linkedin.com/company/novum-farmacias/" }
+  ];
 
-@theme {
-  --color-brand-primary: #004859;
-  --color-brand-secondary: #BF967E;
-  --color-brand-bg: #F1EDE8;
-  --color-brand-text: #333333;
-  
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", sans-serif;
-}
+  return (
+    <section id="inicio" className="relative h-screen flex items-center overflow-hidden !font-['Poppins']">
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&q=80&w=2000" 
+          alt="Fondo Novum" 
+          className="w-full h-full object-cover" 
+        />
+        <div className="absolute inset-0 bg-brand-primary/80 mix-blend-multiply" />
+      </div>
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  body {
-    @apply bg-brand-bg text-brand-text font-sans antialiased;
-  }
-}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col md:flex-row items-center justify-between pt-20">
+        {/* Contenido Principal */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.8 }}
+          className="text-center md:text-left md:max-w-4xl"
+        >
+          <h1 className="text-5xl md:text-8xl lg:text-9xl text-white font-bold leading-[0.9] mb-8 tracking-tighter">
+            Te atendemos <br /> <span className="text-brand-secondary font-light italic">mejor.</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-white/70 mb-10 font-light max-w-2xl">
+            Cercanía y asesoramiento profesional en Tandil.
+          </p>
+          
+          <div className="flex flex-col items-center md:items-start gap-8">
+            <a href="#sucursales" className="inline-block bg-brand-secondary text-white px-10 py-5 rounded-xl font-bold hover:scale-105 transition-all shadow-xl">
+              ¿Dónde estamos?
+            </a>
 
-.glass-card {
-  @apply bg-white/40 backdrop-blur-md border border-white/20 shadow-xl;
-}
+            {/* Redes en MÓVIL (debajo del botón) */}
+            <div className="flex md:hidden gap-6 mt-2">
+              {redes.map((Red, i) => (
+                <a key={i} href={Red.h} target="_blank" rel="noreferrer" className="text-white/80 hover:text-brand-secondary transition-colors">
+                  <Red.i size={28} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </motion.div>
 
-.btn-primary {
-  @apply bg-brand-primary text-white px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 hover:scale-105 active:scale-95;
-}
+        {/* Redes en DESKTOP (A la derecha, verticales y pequeñas) */}
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5 }}
+          className="hidden md:flex flex-col gap-8 border-l border-white/20 pl-8 py-4"
+        >
+          {redes.map((Red, i) => (
+            <a 
+              key={i} 
+              href={Red.h} 
+              target="_blank" 
+              rel="noreferrer" 
+              className="text-white/60 hover:text-brand-secondary transition-all hover:-translate-x-1"
+            >
+              <Red.i size={20} />
+            </a>
+          ))}
+        </motion.div>
+      </div>
 
-.btn-secondary {
-  @apply border-2 border-brand-primary text-brand-primary px-6 py-3 rounded-full font-medium transition-all hover:bg-brand-primary hover:text-white;
-}
-
-.modern-card {
-  @apply bg-white border border-brand-primary/5 p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2;
-}
-
-.logo-placeholder {
-  @apply w-16 h-16 bg-brand-bg flex items-center justify-center text-brand-primary/30 font-bold text-xl mb-6 rounded-xl;
-}
+      {/* Indicador de Scroll */}
+      <div className="absolute bottom-10 left-6 hidden md:flex items-center gap-4 text-white/40">
+        <div className="w-12 h-[1px] bg-white/40"></div>
+        <span className="text-xs uppercase tracking-widest font-bold">Explorar</span>
+      </div>
+    </section>
+  );
+};
