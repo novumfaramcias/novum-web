@@ -26,7 +26,6 @@ import { useState, useEffect, useCallback } from "react";
 export default function App() {
   return (
     <>
-      {/* 1. FUERZA LA IMPORTACIÓN DE POPPINS PARA MÓVILES */}
       <style dangerouslySetInnerHTML={{ __html: `
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
         
@@ -108,23 +107,55 @@ const Navbar = () => {
   );
 };
 
-const Hero = () => (
-  <section id="inicio" className="relative h-screen flex items-center overflow-hidden">
-    <div className="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&q=80&w=2000" alt="Fondo" className="w-full h-full object-cover" />
-      <div className="absolute inset-0 bg-brand-primary/80 mix-blend-multiply" />
-    </div>
-    <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20">
-      <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-        <h1 className="text-5xl md:text-8xl lg:text-9xl text-white font-bold leading-[0.9] mb-8 tracking-tighter">
-          Te atendemos <br /> <span className="text-brand-secondary font-light italic">mejor.</span>
-        </h1>
-        <p className="text-xl md:text-2xl text-white/70 max-w-2xl mb-12 font-light">Cercanía y asesoramiento profesional en Tandil.</p>
-        <a href="#sucursales" className="inline-block bg-brand-secondary text-white px-10 py-5 rounded-xl font-bold hover:scale-105 transition-all shadow-lg">¿Dónde estamos?</a>
-      </motion.div>
-    </div>
-  </section>
-);
+const Hero = () => {
+  const redes = [
+    { Icon: Instagram, href: "https://www.instagram.com/novumfarmacias/?hl=es" },
+    { Icon: Facebook, href: "https://www.facebook.com/novumfarmacias/" },
+    { Icon: Linkedin, href: "https://linkedin.com/company/novum-farmacias/" }
+  ];
+
+  return (
+    <section id="inicio" className="relative h-screen flex items-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&q=80&w=2000" alt="Fondo" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-brand-primary/80 mix-blend-multiply" />
+      </div>
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col md:flex-row items-center justify-between pt-20">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center md:text-left">
+          <h1 className="text-5xl md:text-8xl lg:text-9xl text-white font-bold leading-[0.9] mb-8 tracking-tighter">
+            Te atendemos <br /> <span className="text-brand-secondary font-light italic">mejor.</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-white/70 max-w-2xl mb-12 font-light">Cercanía y asesoramiento profesional en Tandil.</p>
+          
+          <div className="flex flex-col items-center md:items-start gap-8">
+            <a href="#sucursales" className="inline-block bg-brand-secondary text-white px-10 py-5 rounded-xl font-bold hover:scale-105 transition-all shadow-lg">
+              ¿Dónde estamos?
+            </a>
+            
+            {/* Redes en MÓVIL */}
+            <div className="flex md:hidden gap-8 mt-2">
+              {redes.map((red, i) => (
+                <a key={i} href={red.href} target="_blank" rel="noreferrer" className="text-white/80 hover:text-brand-secondary">
+                  <red.Icon size={28} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Redes en DESKTOP */}
+        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }} className="hidden md:flex flex-col gap-8 border-l border-white/20 pl-8 py-4">
+          {redes.map((red, i) => (
+            <a key={i} href={red.href} target="_blank" rel="noreferrer" className="text-white/60 hover:text-brand-secondary transition-all hover:-translate-x-1">
+              <red.Icon size={20} />
+            </a>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
 
 const Sucursales = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -154,7 +185,7 @@ const Sucursales = () => {
 
           <div className="lg:w-2/3">
             <AnimatePresence mode="wait">
-              <motion.div key={activeTab} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white rounded-[1.5rem] overflow-hidden shadow-2xl">
+              <motion.div key={activeTab} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-white rounded-[1.5rem] overflow-hidden shadow-2xl">
                 <div className="relative h-64 md:h-80 group">
                   <img src={sucursales[activeTab].image} alt={sucursales[activeTab].name} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-brand-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-12 backdrop-blur-sm">
