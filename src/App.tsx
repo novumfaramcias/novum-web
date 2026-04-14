@@ -121,7 +121,6 @@ const Hero = () => {
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl">
-          {/* Título escalado a tamaño más elegante */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl text-white font-extrabold leading-[1.1] mb-6 tracking-tight">
             Te atendemos <br /> <span className="text-brand-secondary font-light italic">mejor.</span>
           </h1>
@@ -248,7 +247,6 @@ const Valores = () => (
 const Contacto = () => (
   <section id="contacto" className="py-24 bg-white text-center">
     <div className="max-w-5xl mx-auto px-6">
-      {/* Título de contacto reducido */}
       <h2 className="text-5xl md:text-7xl font-extrabold mb-6 text-brand-primary tracking-tighter">¿Hablamos?</h2>
       <p className="text-base md:text-lg text-brand-text/50 mb-16 font-light max-w-2xl mx-auto">Nuestro equipo está listo para brindarte asesoramiento inmediato vía WhatsApp.</p>
       
@@ -259,10 +257,10 @@ const Contacto = () => (
           { n: "Kuala Lumpur", l: "https://wa.me/5492494288629", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/kualalumpur-5db8e5.svg" }
         ].map((sede) => (
           <a key={sede.n} href={sede.l} target="_blank" rel="noreferrer" className="bg-brand-bg/30 p-8 rounded-2xl border border-transparent hover:border-brand-secondary hover:bg-white transition-all flex flex-col items-center gap-6 shadow-sm group">
+            {/* Logos agregados en la sección de contacto */}
             <div className="h-10 md:h-12 flex items-center justify-center">
               <img src={sede.s} alt={sede.n} className="max-w-full max-h-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all" />
             </div>
-            {/* Texto de WhatsApp fijo, sin efecto hover de aparición */}
             <div className="px-4 py-1.5 bg-brand-primary/10 text-brand-primary rounded-full text-[10px] font-bold uppercase tracking-widest">
               WhatsApp
             </div>
