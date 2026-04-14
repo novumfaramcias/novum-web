@@ -39,6 +39,12 @@ export default function App() {
           overflow-x: hidden;
           scroll-behavior: smooth;
         }
+
+        .brand-logo-container img {
+          max-width: 100%;
+          height: auto;
+          display: block;
+        }
       `}} />
 
       <div className="selection:bg-brand-secondary selection:text-white bg-white min-h-screen">
@@ -71,9 +77,10 @@ const Navbar = () => {
   const logoUrl = "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/Horizontal-blanco.png";
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-white/95 backdrop-blur-md py-2 shadow-md" : "bg-transparent py-6"}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-white/95 backdrop-blur-md py-3 shadow-md" : "bg-transparent py-6"}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <a href="#inicio" className="w-32 md:w-44 transition-all duration-500">
+        {/* Escalado Senior: Proporción áurea aplicada al ancho del logo */}
+        <a href="#inicio" className="w-36 xs:w-40 md:w-48 lg:w-56 transition-all duration-500">
           <img 
             src={logoUrl} 
             alt="Novum Farmacias" 
@@ -81,28 +88,30 @@ const Navbar = () => {
           />
         </a>
 
-        <div className={`hidden md:flex items-center space-x-10 text-xs font-bold uppercase tracking-widest ${isScrolled ? "text-brand-primary" : "text-white"}`}>
+        <div className={`hidden md:flex items-center space-x-10 text-xs font-bold uppercase tracking-[0.2em] ${isScrolled ? "text-brand-primary" : "text-white"}`}>
           <a href="#inicio" className="hover:text-brand-secondary transition-colors">Inicio</a>
           <a href="#sucursales" className="hover:text-brand-secondary transition-colors">Sucursales</a>
           <a href="#galeria" className="hover:text-brand-secondary transition-colors">Galería</a>
-          <a href="https://wa.me/5492494288629" target="_blank" rel="noreferrer" className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all ${isScrolled ? "bg-brand-primary text-white hover:bg-brand-secondary" : "bg-white text-brand-primary hover:bg-brand-bg"}`}>
+          <a href="https://wa.me/5492494288629" target="_blank" rel="noreferrer" className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all font-extrabold ${isScrolled ? "bg-brand-primary text-white hover:bg-brand-secondary hover:shadow-lg" : "bg-white text-brand-primary hover:bg-brand-bg hover:scale-105"}`}>
             <MessageCircle size={16} /> WhatsApp
           </a>
         </div>
 
-        <button className={`md:hidden p-2 ${isScrolled ? "text-brand-primary" : "text-white"}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <button className={`md:hidden p-2 transition-colors ${isScrolled ? "text-brand-primary" : "text-white"}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="md:hidden bg-white border-b absolute top-full left-0 w-full shadow-2xl z-50">
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-white border-b absolute top-full left-0 w-full shadow-2xl z-50 overflow-hidden">
             <div className="px-6 py-10 flex flex-col space-y-6 text-center">
-              <a href="#inicio" onClick={() => setIsMenuOpen(false)} className="text-brand-primary font-bold text-xl">Inicio</a>
-              <a href="#sucursales" onClick={() => setIsMenuOpen(false)} className="text-brand-primary font-bold text-xl">Sucursales</a>
-              <a href="#galeria" onClick={() => setIsMenuOpen(false)} className="text-brand-primary font-bold text-xl">Galería</a>
-              <a href="https://wa.me/5492494288629" className="bg-brand-primary text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2">WhatsApp</a>
+              <a href="#inicio" onClick={() => setIsMenuOpen(false)} className="text-brand-primary font-bold text-2xl tracking-tighter">Inicio</a>
+              <a href="#sucursales" onClick={() => setIsMenuOpen(false)} className="text-brand-primary font-bold text-2xl tracking-tighter">Sucursales</a>
+              <a href="#galeria" onClick={() => setIsMenuOpen(false)} className="text-brand-primary font-bold text-2xl tracking-tighter">Galería</a>
+              <a href="https://wa.me/5492494288629" className="bg-brand-primary text-white py-5 rounded-2xl font-bold flex items-center justify-center gap-2 text-lg shadow-xl">
+                <MessageCircle size={20} /> WhatsApp
+              </a>
             </div>
           </motion.div>
         )}
@@ -121,36 +130,28 @@ const Hero = () => {
   return (
     <section id="inicio" className="relative h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&q=80&w=2000" alt="Fondo" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-brand-primary/80 mix-blend-multiply" />
+        <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&q=80&w=2000" alt="Fondo" className="w-full h-full object-cover scale-105" />
+        <div className="absolute inset-0 bg-brand-primary/85 mix-blend-multiply" />
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col md:flex-row items-center justify-between pt-20">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center md:text-left">
-          <h1 className="text-5xl md:text-8xl lg:text-9xl text-white font-bold leading-[0.9] mb-8 tracking-tighter">
-            Te atendemos <br /> <span className="text-brand-secondary font-light italic">mejor.</span>
+        <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: "easeOut" }} className="text-center md:text-left">
+          <h1 className="text-6xl md:text-8xl lg:text-[10rem] text-white font-bold leading-[0.85] mb-8 tracking-tighter uppercase">
+            Te atendemos <br /> <span className="text-brand-secondary font-light italic normal-case">mejor.</span>
           </h1>
-          <p className="text-xl md:text-2xl text-white/70 max-w-2xl mb-12 font-light">Cercanía y asesoramiento profesional en Tandil.</p>
+          <p className="text-xl md:text-2xl text-white/70 max-w-2xl mb-12 font-light leading-relaxed">Asesoramiento profesional y calidez humana en cada una de nuestras sedes en Tandil.</p>
           
           <div className="flex flex-col items-center md:items-start gap-8">
-            <a href="#sucursales" className="inline-block bg-brand-secondary text-white px-10 py-5 rounded-xl font-bold hover:scale-105 transition-all shadow-lg">
+            <a href="#sucursales" className="inline-block bg-brand-secondary text-white px-12 py-6 rounded-2xl font-black uppercase tracking-widest text-sm hover:scale-105 transition-all shadow-[0_20px_50px_rgba(0,0,0,0.2)] hover:shadow-brand-secondary/40">
               ¿Dónde estamos?
             </a>
-            
-            <div className="flex md:hidden gap-8 mt-2">
-              {redes.map((red, i) => (
-                <a key={i} href={red.href} target="_blank" rel="noreferrer" className="text-white/80 hover:text-brand-secondary">
-                  <red.Icon size={28} />
-                </a>
-              ))}
-            </div>
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }} className="hidden md:flex flex-col gap-8 border-l border-white/20 pl-8 py-4">
+        <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.8 }} className="hidden md:flex flex-col gap-10 border-l border-white/10 pl-10 py-6">
           {redes.map((red, i) => (
-            <a key={i} href={red.href} target="_blank" rel="noreferrer" className="text-white/60 hover:text-brand-secondary transition-all hover:-translate-x-1">
-              <red.Icon size={20} />
+            <a key={i} href={red.href} target="_blank" rel="noreferrer" className="text-white/40 hover:text-brand-secondary transition-all transform hover:-translate-x-2">
+              <red.Icon size={24} strokeWidth={1.5} />
             </a>
           ))}
         </motion.div>
@@ -186,43 +187,46 @@ const Sucursales = () => {
   ];
 
   return (
-    <section id="sucursales" className="py-20 md:py-32 bg-white">
+    <section id="sucursales" className="py-24 md:py-40 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-12 text-center md:text-left">
-          <span className="text-brand-secondary font-bold uppercase tracking-widest text-sm mb-4 block">Red de atención</span>
-          <h2 className="text-4xl md:text-6xl font-extrabold text-brand-primary tracking-tighter">Nuestras sucursales.</h2>
+        <div className="mb-20 text-center md:text-left">
+          <span className="text-brand-secondary font-black uppercase tracking-[0.3em] text-xs mb-4 block">Ecosistema Novum</span>
+          <h2 className="text-5xl md:text-8xl font-extrabold text-brand-primary tracking-tighter leading-none">Nuestras <br className="hidden md:block" /> sucursales.</h2>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-6 bg-brand-bg/40 p-4 md:p-8 rounded-[2rem]">
-          <div className="lg:w-1/3 flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0">
+        <div className="flex flex-col lg:flex-row gap-8 bg-brand-bg/30 p-4 md:p-10 rounded-[3rem]">
+          <div className="lg:w-1/3 flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-visible pb-6 lg:pb-0 scrollbar-hide">
             {sucursales.map((suc, idx) => (
-              <button key={idx} onClick={() => setActiveTab(idx)} className={`p-6 text-center lg:text-left rounded-2xl transition-all flex-1 lg:flex-none flex items-center justify-between min-w-[160px] ${activeTab === idx ? "bg-brand-primary text-white shadow-xl" : "bg-white text-brand-primary"}`}>
-                <span className="font-bold text-sm md:text-base">{suc.name}</span>
-                <ArrowRight className={`hidden lg:block ${activeTab === idx ? "opacity-100" : "opacity-0"}`} size={18} />
+              <button key={idx} onClick={() => setActiveTab(idx)} className={`p-8 text-center lg:text-left rounded-3xl transition-all flex-1 lg:flex-none flex items-center justify-between min-w-[200px] group ${activeTab === idx ? "bg-brand-primary text-white shadow-2xl scale-[1.02]" : "bg-white text-brand-primary hover:bg-white/80"}`}>
+                <span className="font-extrabold text-lg tracking-tight">{suc.name}</span>
+                <ArrowRight className={`hidden lg:block transition-transform duration-300 ${activeTab === idx ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"}`} size={20} />
               </button>
             ))}
           </div>
 
           <div className="lg:w-2/3">
             <AnimatePresence mode="wait">
-              <motion.div key={activeTab} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-white rounded-[1.5rem] overflow-hidden shadow-2xl">
-                <div className="relative h-64 md:h-80 group">
-                  <img src={sucursales[activeTab].image} alt={sucursales[activeTab].name} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-brand-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-12 backdrop-blur-sm">
-                    <img src={sucursales[activeTab].logo} alt="Logo" className="max-w-full max-h-32 brightness-0 invert" />
-                  </div>
-                </div>
-                <div className="p-8 md:p-10 flex flex-col md:flex-row justify-between items-center gap-6">
-                  <div className="text-center md:text-left overflow-hidden">
-                    <h3 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-brand-primary mb-2 whitespace-nowrap overflow-ellipsis">
-                      Farmacia {sucursales[activeTab].name}
-                    </h3>
-                    <div className="flex items-center justify-center md:justify-start gap-2 text-brand-text/70 text-sm">
-                      <MapPin size={16} className="text-brand-secondary shrink-0" /> {sucursales[activeTab].address}
+              <motion.div key={activeTab} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.5 }} className="bg-white rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.07)]">
+                <div className="relative h-72 md:h-[450px] group overflow-hidden">
+                  <img src={sucursales[activeTab].image} alt={sucursales[activeTab].name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-brand-primary/40 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center p-12 backdrop-blur-sm">
+                    {/* Escalado Senior de Logo Interno */}
+                    <div className="w-full max-w-[280px] h-24 md:h-32 flex items-center justify-center">
+                      <img src={sucursales[activeTab].logo} alt="Sede Logo" className="max-w-full max-h-full object-contain brightness-0 invert" />
                     </div>
                   </div>
-                  <a href={sucursales[activeTab].whatsapp} target="_blank" rel="noreferrer" className="w-full md:w-auto flex items-center justify-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#1ebd5b] transition-all shrink-0">
-                    <MessageCircle size={20} /> WhatsApp
+                </div>
+                <div className="p-10 md:p-14 flex flex-col md:flex-row justify-between items-center gap-10">
+                  <div className="text-center md:text-left">
+                    <h3 className="text-3xl md:text-4xl font-black text-brand-primary mb-4 tracking-tighter">
+                      Farmacia {sucursales[activeTab].name}
+                    </h3>
+                    <div className="flex items-center justify-center md:justify-start gap-3 text-brand-text/60 text-lg font-light">
+                      <div className="p-2 bg-brand-bg rounded-lg text-brand-secondary"><MapPin size={20} /></div> {sucursales[activeTab].address}
+                    </div>
+                  </div>
+                  <a href={sucursales[activeTab].whatsapp} target="_blank" rel="noreferrer" className="w-full md:w-auto flex items-center justify-center gap-4 bg-[#25D366] text-white px-10 py-5 rounded-2xl font-black text-lg hover:bg-[#1ebd5b] hover:shadow-2xl hover:shadow-[#25D366]/30 transition-all shrink-0">
+                    <MessageCircle size={24} /> WhatsApp
                   </a>
                 </div>
               </motion.div>
@@ -246,20 +250,21 @@ const GaleriaSlider = () => {
   const prev = () => setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
 
   useEffect(() => {
-    const timer = setInterval(next, 5000);
+    const timer = setInterval(next, 6000);
     return () => clearInterval(timer);
   }, [next]);
 
   return (
-    <section id="galeria" className="py-20 md:py-32 bg-brand-bg/20">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="relative h-[400px] md:h-[600px] rounded-[2rem] overflow-hidden shadow-2xl">
+    <section id="galeria" className="py-10 md:py-20 bg-white">
+      <div className="max-w-[1600px] mx-auto px-6">
+        <div className="relative h-[500px] md:h-[800px] rounded-[3rem] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.1)]">
           <AnimatePresence mode="wait">
-            <motion.img key={current} src={images[current]} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full object-cover" />
+            <motion.img key={current} src={images[current]} initial={{ opacity: 0, scale: 1.1 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1.2 }} className="absolute inset-0 w-full h-full object-cover" />
           </AnimatePresence>
-          <div className="absolute inset-0 flex items-center justify-between px-4">
-            <button onClick={prev} className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"><ChevronLeft size={30} /></button>
-            <button onClick={next} className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"><ChevronRight size={30} /></button>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 flex items-center justify-between px-8">
+            <button onClick={prev} className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all border border-white/20"><ChevronLeft size={36} /></button>
+            <button onClick={next} className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all border border-white/20"><ChevronRight size={36} /></button>
           </div>
         </div>
       </div>
@@ -268,19 +273,20 @@ const GaleriaSlider = () => {
 };
 
 const Valores = () => (
-  <section id="valores" className="py-24 bg-brand-primary text-white">
-    <div className="max-w-7xl mx-auto px-6">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
+  <section id="valores" className="py-32 md:py-48 bg-brand-primary text-white relative overflow-hidden">
+    <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 skew-x-12 translate-x-32" />
+    <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="grid lg:grid-cols-2 gap-24 items-center">
         <div>
-          <span className="text-brand-secondary font-bold uppercase tracking-widest text-sm mb-4 block">Nuestra Esencia</span>
-          <h2 className="text-4xl md:text-7xl font-bold mb-8 tracking-tight leading-[1.1]">Valores que <br /> nos definen.</h2>
-          <p className="text-xl text-white/70 leading-relaxed underline decoration-brand-secondary underline-offset-8">Te atendemos mejor.</p>
+          <span className="text-brand-secondary font-black uppercase tracking-[0.4em] text-xs mb-6 block">Nuestra Esencia</span>
+          <h2 className="text-6xl md:text-8xl font-extrabold mb-10 tracking-tighter leading-[0.9]">Valores que <br /> nos definen.</h2>
+          <p className="text-2xl text-white/60 leading-relaxed font-light italic decoration-brand-secondary underline underline-offset-[12px] decoration-2">Te atendemos mejor.</p>
         </div>
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 gap-8">
           {[ { i: Heart, t: "Calidez" }, { i: Leaf, t: "Naturalidad" }, { i: MapPin, t: "Cercanía" }, { i: ShieldCheck, t: "Calidad" } ].map((v, idx) => (
-            <div key={idx} className="p-8 rounded-2xl bg-white/5 border border-white/10 group hover:bg-white/10 transition-colors">
-              <v.i size={32} className="text-brand-secondary mb-4 group-hover:scale-110 transition-transform" />
-              <h4 className="text-lg font-bold uppercase">{v.t}</h4>
+            <div key={idx} className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 group hover:bg-brand-secondary transition-all duration-500 hover:-translate-y-2">
+              <v.i size={40} strokeWidth={1} className="text-brand-secondary mb-6 group-hover:text-white transition-colors" />
+              <h4 className="text-xl font-bold uppercase tracking-widest">{v.t}</h4>
             </div>
           ))}
         </div>
@@ -290,19 +296,23 @@ const Valores = () => (
 );
 
 const Contacto = () => (
-  <section id="contacto" className="py-24 bg-white text-center">
-    <div className="max-w-5xl mx-auto px-6">
-      <h2 className="text-6xl md:text-8xl font-bold mb-8 text-brand-primary tracking-tighter">¿Hablamos?</h2>
-      <p className="text-xl md:text-2xl text-brand-text/60 mb-16 font-light">Escribinos por WhatsApp y recibí asesoramiento inmediato.</p>
-      <div className="grid md:grid-cols-3 gap-6">
+  <section id="contacto" className="py-32 md:py-48 bg-white text-center">
+    <div className="max-w-6xl mx-auto px-6">
+      <h2 className="text-7xl md:text-[11rem] font-black mb-10 text-brand-primary tracking-tighter leading-none">¿Hablamos?</h2>
+      <p className="text-xl md:text-3xl text-brand-text/50 mb-20 font-light max-w-3xl mx-auto">Nuestro equipo está listo para brindarte el asesoramiento profesional que necesitás.</p>
+      
+      <div className="grid md:grid-cols-3 gap-8">
         {[ 
           { n: "Novafarma", l: "https://wa.me/5492494272729", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/novafarma-91b9ac.svg" },
           { n: "Piedra Que Late", l: "https://wa.me/5492494370055", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/piedra-que-late-98ef69.svg" },
           { n: "Kuala Lumpur", l: "https://wa.me/5492494288629", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/kualalumpur-5db8e5.svg" }
         ].map((sede) => (
-          <a key={sede.n} href={sede.l} target="_blank" rel="noreferrer" className="bg-brand-bg/50 p-10 rounded-2xl border-2 border-transparent hover:border-brand-secondary transition-all flex flex-col items-center gap-6 shadow-sm group">
-            <img src={sede.s} alt={sede.n} className="h-10 w-auto grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all" />
-            <span className="font-bold text-xs uppercase tracking-widest text-brand-primary">WhatsApp</span>
+          <a key={sede.n} href={sede.l} target="_blank" rel="noreferrer" className="bg-brand-bg/40 p-12 rounded-[3rem] border-2 border-transparent hover:border-brand-secondary hover:bg-white transition-all duration-500 flex flex-col items-center gap-8 shadow-sm group hover:shadow-2xl hover:shadow-brand-secondary/10">
+            {/* Escalado Senior en Contacto */}
+            <div className="h-12 md:h-16 w-full flex items-center justify-center overflow-hidden">
+              <img src={sede.s} alt={sede.n} className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110" />
+            </div>
+            <div className="px-6 py-2 bg-brand-primary text-white rounded-full text-[10px] font-black uppercase tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-opacity">WhatsApp</div>
           </a>
         ))}
       </div>
@@ -311,18 +321,22 @@ const Contacto = () => (
 );
 
 const Footer = () => (
-  <footer className="py-20 bg-brand-bg">
-    <div className="max-w-7xl mx-auto px-6">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-12 mb-12">
-        <img src="https://novumfarmacias.com.ar/wp-content/uploads/2026/04/Horizontal-blanco.png" alt="Novum" className="w-32 md:w-40 brightness-0" />
-        <div className="flex space-x-5">
-          <a href="https://www.instagram.com/novumfarmacias/?hl=es" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-white flex items-center justify-center text-brand-primary shadow-sm hover:bg-brand-secondary hover:text-white transition-all"><Instagram size={20} /></a>
-          <a href="https://www.facebook.com/novumfarmacias/" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-white flex items-center justify-center text-brand-primary shadow-sm hover:bg-brand-secondary hover:text-white transition-all"><Facebook size={20} /></a>
-          <a href="https://linkedin.com/company/novum-farmacias/" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-white flex items-center justify-center text-brand-primary shadow-sm hover:bg-brand-secondary hover:text-white transition-all"><Linkedin size={20} /></a>
+  <footer className="py-24 bg-brand-bg relative overflow-hidden">
+    <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-16 mb-16">
+        <div className="w-48 md:w-64">
+           <img src="https://novumfarmacias.com.ar/wp-content/uploads/2026/04/Horizontal-blanco.png" alt="Novum" className="w-full brightness-0 opacity-80" />
+        </div>
+        <div className="flex space-x-6">
+          {[ {I: Instagram, h: "https://www.instagram.com/novumfarmacias/?hl=es"}, {I: Facebook, h: "https://www.facebook.com/novumfarmacias/"}, {I: Linkedin, h: "https://linkedin.com/company/novum-farmacias/"} ].map((social, i) => (
+            <a key={i} href={social.h} target="_blank" rel="noreferrer" className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-brand-primary shadow-xl hover:bg-brand-secondary hover:text-white hover:-translate-y-2 transition-all duration-300">
+              <social.I size={24} strokeWidth={1.5} />
+            </a>
+          ))}
         </div>
       </div>
-      <div className="text-center text-[10px] text-brand-primary/40 pt-8 border-t border-brand-primary/5 uppercase tracking-[0.3em] font-bold">
-        @ 2026 Novum Farmacias - Todos los derechos reservados
+      <div className="text-center text-[11px] text-brand-primary/30 pt-12 border-t border-brand-primary/5 uppercase tracking-[0.5em] font-black">
+        © 2026 Novum Farmacias <span className="mx-4 hidden md:inline">|</span> Todos los derechos reservados
       </div>
     </div>
   </footer>
