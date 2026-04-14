@@ -250,18 +250,18 @@ const Contacto = () => (
       <h2 className="text-5xl md:text-7xl font-extrabold mb-6 text-brand-primary tracking-tighter">¿Hablamos?</h2>
       <p className="text-base md:text-lg text-brand-text/50 mb-16 font-light max-w-2xl mx-auto">Nuestro equipo está listo para brindarte asesoramiento inmediato vía WhatsApp.</p>
       
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-8">
         {[ 
           { n: "Novafarma", l: "https://wa.me/5492494272729", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/novafarma-91b9ac.svg" },
           { n: "Piedra Que Late", l: "https://wa.me/5492494370055", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/piedra-que-late-98ef69.svg" },
           { n: "Kuala Lumpur", l: "https://wa.me/5492494288629", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/kualalumpur-5db8e5.svg" }
         ].map((sede) => (
-          <a key={sede.n} href={sede.l} target="_blank" rel="noreferrer" className="bg-brand-bg/30 p-8 rounded-2xl border border-transparent hover:border-brand-secondary hover:bg-white transition-all flex flex-col items-center gap-6 shadow-sm group">
-            {/* Logos agregados en la sección de contacto */}
-            <div className="h-10 md:h-12 flex items-center justify-center">
-              <img src={sede.s} alt={sede.n} className="max-w-full max-h-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all" />
+          <a key={sede.n} href={sede.l} target="_blank" rel="noreferrer" className="bg-brand-bg/30 p-10 rounded-[2rem] border-2 border-transparent hover:border-brand-secondary hover:bg-white transition-all duration-300 flex flex-col items-center gap-8 shadow-sm group">
+            <div className="h-16 md:h-20 w-full flex items-center justify-center">
+              {/* Se quitaron filtros de escala de grises y brillo para asegurar visibilidad total */}
+              <img src={sede.s} alt={sede.n} className="max-w-full max-h-full object-contain" />
             </div>
-            <div className="px-4 py-1.5 bg-brand-primary/10 text-brand-primary rounded-full text-[10px] font-bold uppercase tracking-widest">
+            <div className="px-5 py-2 bg-brand-primary text-white rounded-full text-[10px] font-bold uppercase tracking-widest">
               WhatsApp
             </div>
           </a>
