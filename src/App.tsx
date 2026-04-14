@@ -73,7 +73,6 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-white/95 backdrop-blur-md py-2 shadow-md" : "bg-transparent py-6"}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        {/* Ajuste de escala: w-32 en móvil y w-44 en desktop para que sea armónico */}
         <a href="#inicio" className="w-32 md:w-44 transition-all duration-500">
           <img 
             src={logoUrl} 
@@ -163,9 +162,27 @@ const Hero = () => {
 const Sucursales = () => {
   const [activeTab, setActiveTab] = useState(0);
   const sucursales = [
-    { name: "Novafarma", address: "Quintana y Basilico, Villa Italia", whatsapp: "https://wa.me/5492494272729", image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/novum1.jpeg", logo: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/logo-original-591e34.svg" },
-    { name: "Piedra Que Late", address: "Sanllorenti 783, Barrio Procrear", whatsapp: "https://wa.me/5492494370055", image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/novum2.jpeg", logo: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/piedra-que-late-8be7d7.svg" },
-    { name: "Kuala Lumpur", address: "Pinto y 14 de Julio, Centro", whatsapp: "https://wa.me/5492494288629", image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/novum3.jpeg", logo: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/kuala-lumpur-dcb5d4.svg" },
+    { 
+      name: "Novafarma", 
+      address: "Quintana y Basilico, Villa Italia", 
+      whatsapp: "https://wa.me/5492494272729", 
+      image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/novum1.jpeg", 
+      logo: "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/novafarma-91b9ac.svg" 
+    },
+    { 
+      name: "Piedra Que Late", 
+      address: "Sanllorenti 783, Barrio Procrear", 
+      whatsapp: "https://wa.me/5492494370055", 
+      image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/novum2.jpeg", 
+      logo: "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/piedra-que-late-98ef69.svg" 
+    },
+    { 
+      name: "Kuala Lumpur", 
+      address: "Pinto y 14 de Julio, Centro", 
+      whatsapp: "https://wa.me/5492494288629", 
+      image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/novum3.jpeg", 
+      logo: "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/kualalumpur-5db8e5.svg" 
+    },
   ];
 
   return (
@@ -279,9 +296,9 @@ const Contacto = () => (
       <p className="text-xl md:text-2xl text-brand-text/60 mb-16 font-light">Escribinos por WhatsApp y recibí asesoramiento inmediato.</p>
       <div className="grid md:grid-cols-3 gap-6">
         {[ 
-          { n: "Novafarma", l: "https://wa.me/5492494272729", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/logo-original-591e34.svg" },
-          { n: "Piedra Que Late", l: "https://wa.me/5492494370055", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/piedra-que-late-8be7d7.svg" },
-          { n: "Kuala Lumpur", l: "https://wa.me/5492494288629", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/kuala-lumpur-dcb5d4.svg" }
+          { n: "Novafarma", l: "https://wa.me/5492494272729", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/novafarma-91b9ac.svg" },
+          { n: "Piedra Que Late", l: "https://wa.me/5492494370055", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/piedra-que-late-98ef69.svg" },
+          { n: "Kuala Lumpur", l: "https://wa.me/5492494288629", s: "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/kualalumpur-5db8e5.svg" }
         ].map((sede) => (
           <a key={sede.n} href={sede.l} target="_blank" rel="noreferrer" className="bg-brand-bg/50 p-10 rounded-2xl border-2 border-transparent hover:border-brand-secondary transition-all flex flex-col items-center gap-6 shadow-sm group">
             <img src={sede.s} alt={sede.n} className="h-10 w-auto grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all" />
