@@ -71,10 +71,10 @@ const Navbar = () => {
   const logoUrl = "https://novumfarmacias.com.ar/wp-content/uploads/2026/04/Horizontal-blanco.png";
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-white/95 backdrop-blur-md py-3 shadow-md" : "bg-transparent py-6"}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-white/95 backdrop-blur-md py-2 shadow-md" : "bg-transparent py-6"}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <a href="#inicio" className="w-40 md:w-52">
-          {/* Aplicamos brillo 0 (negro) solo cuando hay scroll, ya que el logo original es blanco */}
+        {/* Ajuste de escala: w-32 en móvil y w-44 en desktop para que sea armónico */}
+        <a href="#inicio" className="w-32 md:w-44 transition-all duration-500">
           <img 
             src={logoUrl} 
             alt="Novum Farmacias" 
@@ -297,8 +297,7 @@ const Footer = () => (
   <footer className="py-20 bg-brand-bg">
     <div className="max-w-7xl mx-auto px-6">
       <div className="flex flex-col md:flex-row justify-between items-center gap-12 mb-12">
-        {/* Usamos brillo 0 para que el logo blanco se vea negro sobre el fondo claro del footer */}
-        <img src="https://novumfarmacias.com.ar/wp-content/uploads/2026/04/Horizontal-blanco.png" alt="Novum" className="w-44 brightness-0" />
+        <img src="https://novumfarmacias.com.ar/wp-content/uploads/2026/04/Horizontal-blanco.png" alt="Novum" className="w-32 md:w-40 brightness-0" />
         <div className="flex space-x-5">
           <a href="https://www.instagram.com/novumfarmacias/?hl=es" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-white flex items-center justify-center text-brand-primary shadow-sm hover:bg-brand-secondary hover:text-white transition-all"><Instagram size={20} /></a>
           <a href="https://www.facebook.com/novumfarmacias/" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-white flex items-center justify-center text-brand-primary shadow-sm hover:bg-brand-secondary hover:text-white transition-all"><Facebook size={20} /></a>
