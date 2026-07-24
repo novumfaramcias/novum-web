@@ -161,56 +161,61 @@ const PromocionesSlider = () => {
   }, [next]);
 
   return (
-    <section id="promociones" className="w-full bg-white py-4 md:py-8">
-      <div className="max-w-[1920px] mx-auto px-0 md:px-6">
-        {/* En móvil usa aspecto 16/9 para mejorar la escala de lectura y en desktop 1920/447 */}
-        <div className="relative w-full aspect-[16/9] md:aspect-[1920/447] overflow-hidden shadow-lg md:rounded-2xl bg-brand-bg/20">
+    <section id="promociones" className="w-full bg-white py-6 md:py-12">
+      {/* max-w-7xl limita el ancho en PC para que no ocupe toda la pantalla a lo largo */}
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="relative w-full rounded-2xl overflow-hidden shadow-lg bg-brand-bg/20">
+          
           <AnimatePresence mode="wait">
-            <motion.img
+            <motion.div
               key={current}
-              src={promoImages[current]}
-              alt={`Promoción Novum ${current + 1}`}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.6 }}
-              className="w-full h-full object-cover object-center"
-            />
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="w-full flex items-center justify-center bg-[#F1EDE8]"
+            >
+              <img
+                src={promoImages[current]}
+                alt={`Promoción Novum ${current + 1}`}
+                /* object-contain asegura que NUNCA se corte la imagen en ningún celular */
+                className="w-full h-auto max-h-[450px] object-contain md:object-cover"
+              />
+            </motion.div>
           </AnimatePresence>
 
           {/* Botones de navegación lateral */}
-          <div className="absolute inset-0 flex items-center justify-between px-2 md:px-6 pointer-events-none">
+          <div className="absolute inset-0 flex items-center justify-between px-2 md:px-4 pointer-events-none">
             <button
               onClick={prev}
-              className="pointer-events-auto w-8 h-8 md:w-11 md:h-11 rounded-full bg-black/40 backdrop-blur-md text-white flex items-center justify-center hover:bg-brand-primary transition-all shadow-md"
+              className="pointer-events-auto w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center hover:bg-brand-primary transition-all shadow-md"
               aria-label="Anterior promoción"
             >
-              <ChevronLeft size={20} className="md:hidden" />
-              <ChevronLeft size={24} className="hidden md:block" />
+              <ChevronLeft size={20} />
             </button>
             <button
               onClick={next}
-              className="pointer-events-auto w-8 h-8 md:w-11 md:h-11 rounded-full bg-black/40 backdrop-blur-md text-white flex items-center justify-center hover:bg-brand-primary transition-all shadow-md"
+              className="pointer-events-auto w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center hover:bg-brand-primary transition-all shadow-md"
               aria-label="Siguiente promoción"
             >
-              <ChevronRight size={20} className="md:hidden" />
-              <ChevronRight size={24} className="hidden md:block" />
+              <ChevronRight size={20} />
             </button>
           </div>
 
           {/* Indicadores de posición (Dots) */}
-          <div className="absolute bottom-2 md:bottom-5 left-0 right-0 flex justify-center gap-1.5 md:gap-2 z-10">
+          <div className="absolute bottom-2 md:bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
             {promoImages.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrent(idx)}
-                className={`h-1.5 md:h-2 rounded-full transition-all duration-300 ${
-                  current === idx ? "w-5 md:w-8 bg-brand-secondary" : "w-1.5 md:w-2 bg-white/60 hover:bg-white"
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  current === idx ? "w-6 bg-brand-secondary" : "w-2 bg-black/30 hover:bg-black/50"
                 }`}
                 aria-label={`Ver promoción ${idx + 1}`}
               />
             ))}
           </div>
+
         </div>
       </div>
     </section>
