@@ -39,6 +39,7 @@ export default function App() {
         <Navbar />
         <main>
           <Hero />
+          <PromocionesSlider />
           <Sucursales />
           <GaleriaSlider />
           <Valores />
@@ -130,6 +131,87 @@ const Hero = () => {
             Nuestras Sucursales
           </a>
         </motion.div>
+      </div>
+    </section>
+  );
+};
+
+// --- SLIDER DE PROMOCIONES (RESPONSIVE MÓVIL Y DESKTOP) ---
+
+const PromocionesSlider = () => {
+  const promoImages = [
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-3.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-2.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-1.webp"
+  ];
+
+  const [current, setCurrent] = useState(0);
+
+  const next = useCallback(() => {
+    setCurrent((prev) => (prev === promoImages.length - 1 ? 0 : prev + 1));
+  }, [promoImages.length]);
+
+  const prev = () => {
+    setCurrent((prev) => (prev === 0 ? promoImages.length - 1 : prev - 1));
+  };
+
+  useEffect(() => {
+    const timer = setInterval(next, 4000);
+    return () => clearInterval(timer);
+  }, [next]);
+
+  return (
+    <section id="promociones" className="w-full bg-white py-4 md:py-8">
+      <div className="max-w-[1920px] mx-auto px-0 md:px-6">
+        {/* En móvil usa aspecto 16/9 para mejorar la escala de lectura y en desktop 1920/447 */}
+        <div className="relative w-full aspect-[16/9] md:aspect-[1920/447] overflow-hidden shadow-lg md:rounded-2xl bg-brand-bg/20">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={current}
+              src={promoImages[current]}
+              alt={`Promoción Novum ${current + 1}`}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.6 }}
+              className="w-full h-full object-cover object-center"
+            />
+          </AnimatePresence>
+
+          {/* Botones de navegación lateral */}
+          <div className="absolute inset-0 flex items-center justify-between px-2 md:px-6 pointer-events-none">
+            <button
+              onClick={prev}
+              className="pointer-events-auto w-8 h-8 md:w-11 md:h-11 rounded-full bg-black/40 backdrop-blur-md text-white flex items-center justify-center hover:bg-brand-primary transition-all shadow-md"
+              aria-label="Anterior promoción"
+            >
+              <ChevronLeft size={20} className="md:hidden" />
+              <ChevronLeft size={24} className="hidden md:block" />
+            </button>
+            <button
+              onClick={next}
+              className="pointer-events-auto w-8 h-8 md:w-11 md:h-11 rounded-full bg-black/40 backdrop-blur-md text-white flex items-center justify-center hover:bg-brand-primary transition-all shadow-md"
+              aria-label="Siguiente promoción"
+            >
+              <ChevronRight size={20} className="md:hidden" />
+              <ChevronRight size={24} className="hidden md:block" />
+            </button>
+          </div>
+
+          {/* Indicadores de posición (Dots) */}
+          <div className="absolute bottom-2 md:bottom-5 left-0 right-0 flex justify-center gap-1.5 md:gap-2 z-10">
+            {promoImages.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrent(idx)}
+                className={`h-1.5 md:h-2 rounded-full transition-all duration-300 ${
+                  current === idx ? "w-5 md:w-8 bg-brand-secondary" : "w-1.5 md:w-2 bg-white/60 hover:bg-white"
+                }`}
+                aria-label={`Ver promoción ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
