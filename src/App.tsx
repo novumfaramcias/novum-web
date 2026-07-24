@@ -136,13 +136,14 @@ const Hero = () => {
   );
 };
 
-// --- SLIDER DE PROMOCIONES (RESPONSIVE MÓVIL Y DESKTOP) ---
+// --- SLIDER DE PROMOCIONES (CON 4 IMÁGENES Y ADAPTACIÓN RESPONSIVE) ---
 
 const PromocionesSlider = () => {
   const promoImages = [
     "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-3.webp",
     "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-2.webp",
-    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-1.webp"
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-1.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-4.webp"
   ];
 
   const [current, setCurrent] = useState(0);
@@ -162,7 +163,6 @@ const PromocionesSlider = () => {
 
   return (
     <section id="promociones" className="w-full bg-white py-6 md:py-12">
-      {/* max-w-7xl limita el ancho en PC para que no ocupe toda la pantalla a lo largo */}
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="relative w-full rounded-2xl overflow-hidden shadow-lg bg-brand-bg/20">
           
@@ -178,7 +178,6 @@ const PromocionesSlider = () => {
               <img
                 src={promoImages[current]}
                 alt={`Promoción Novum ${current + 1}`}
-                /* object-contain asegura que NUNCA se corte la imagen en ningún celular */
                 className="w-full h-auto max-h-[450px] object-contain md:object-cover"
               />
             </motion.div>
