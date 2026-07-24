@@ -301,7 +301,7 @@ const DestacadosInfo = () => {
 
 const PromocionesSlider = () => {
   const promoImages = [
-    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-1.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-banco.webp",
     "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-2.webp",
     "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-4.webp",
     "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-3.webp",
