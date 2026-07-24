@@ -419,7 +419,7 @@ const BannersParalelos = () => {
   );
 };
 
-// --- NUEVO BANNER FINO DE WHATSAPP AL 100% DE ANCHO ---
+// --- BANNER FINO DE WHATSAPP ---
 
 const BannerWhatsapp = () => {
   return (
@@ -499,33 +499,55 @@ const Sucursales = () => {
   );
 };
 
+// --- NUEVA GALERÍA DE IMÁGENES REDUCIDA A LA MITAD Y EN FORMATO CARRUSEL CUADRADO ---
+
 const GaleriaSlider = () => {
   const images = [
-    "https://novumfarmacias.com.ar/wp-content/uploads/2025/11/DSC00081.jpg",
-    "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/piedraquelate-farmacia-interior-2-scaled.jpg",
-    "https://novumfarmacias.com.ar/wp-content/uploads/2026/03/piedraquelate-farmacia-interior-1-scaled.jpg"
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-atencion.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/kuala-lumpur-farmacia-novum.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-tandil-kuala-lumpur.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/tandil-novum.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novafarma-novum.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/farmacias-tandil-atencion.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/piedra-que-late-tandil-farmacias.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/piedra-que-late-tandil-novum-farmacias.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/kuala-lumpur-atencion-novum-farmacias.webp"
   ];
-  const [current, setCurrent] = useState(0);
-  const next = useCallback(() => setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1)), [images.length]);
-  const prev = useCallback(() => setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1)), [images.length]);
+
+  const [startIndex, setStartIndex] = useState(0);
+
+  const next = useCallback(() => {
+    setStartIndex((prev) => (prev + 1) % images.length);
+  }, [images.length]);
+
+  const prev = useCallback(() => {
+    setStartIndex((prev) => (prev - 1 + images.length) % images.length);
+  }, [images.length]);
 
   useEffect(() => {
     const timer = setInterval(next, 5000);
     return () => clearInterval(timer);
   }, [next]);
 
+  // Obtener 3 imágenes consecutivas manteniendo el loop
+  const visibleImages = [
+    images[startIndex],
+    images[(startIndex + 1) % images.length],
+    images[(startIndex + 2) % images.length]
+  ];
+
   return (
-    <section id="galeria" className="py-16 md:py-24">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="relative h-[350px] md:h-[550px] rounded-[2rem] overflow-hidden shadow-2xl touch-pan-y">
+    <section id="galeria" className="py-12 md:py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="relative group">
+          
           <AnimatePresence mode="wait">
-            <motion.img 
-              key={current} 
-              src={images[current]} 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              exit={{ opacity: 0 }} 
-              transition={{ duration: 0.8 }} 
+            <motion.div
+              key={startIndex}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.5 }}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.2}
@@ -533,13 +555,57 @@ const GaleriaSlider = () => {
                 if (info.offset.x < -50) next();
                 if (info.offset.x > 50) prev();
               }}
-              className="absolute inset-0 w-full h-full object-cover cursor-grab active:cursor-grabbing" 
-            />
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 cursor-grab active:cursor-grabbing touch-pan-y"
+            >
+              {visibleImages.map((imgUrl, idx) => (
+                <div
+                  key={`${startIndex}-${idx}`}
+                  className={`relative aspect-square overflow-hidden rounded-2xl shadow-md border border-brand-primary/5 bg-brand-bg/20 ${
+                    idx >= 1 ? "hidden sm:block" : ""
+                  } ${idx === 2 ? "hidden md:block" : ""}`}
+                >
+                  <img
+                    src={imgUrl}
+                    alt={`Galería Novum ${idx + 1}`}
+                    className="w-full h-full object-cover pointer-events-none hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              ))}
+            </motion.div>
           </AnimatePresence>
-          <div className="absolute inset-0 hidden md:flex items-center justify-between px-4 pointer-events-none">
-            <button onClick={prev} className="pointer-events-auto w-10 h-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"><ChevronLeft size={24} /></button>
-            <button onClick={next} className="pointer-events-auto w-10 h-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"><ChevronRight size={24} /></button>
+
+          {/* Flechas de navegación (Desktop) */}
+          <div className="absolute inset-0 hidden md:flex items-center justify-between pointer-events-none -mx-5">
+            <button
+              onClick={prev}
+              className="pointer-events-auto w-11 h-11 rounded-full bg-white/90 shadow-lg text-brand-primary flex items-center justify-center hover:bg-brand-primary hover:text-white transition-all border border-brand-primary/10"
+              aria-label="Anterior en galería"
+            >
+              <ChevronLeft size={22} />
+            </button>
+            <button
+              onClick={next}
+              className="pointer-events-auto w-11 h-11 rounded-full bg-white/90 shadow-lg text-brand-primary flex items-center justify-center hover:bg-brand-primary hover:text-white transition-all border border-brand-primary/10"
+              aria-label="Siguiente en galería"
+            >
+              <ChevronRight size={22} />
+            </button>
           </div>
+
+          {/* Puntos de posición inferiores */}
+          <div className="flex justify-center gap-2 mt-8">
+            {images.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setStartIndex(idx)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  startIndex === idx ? "w-6 bg-brand-secondary" : "w-2 bg-brand-primary/20 hover:bg-brand-primary/40"
+                }`}
+                aria-label={`Ir a foto ${idx + 1}`}
+              />
+            ))}
+          </div>
+
         </div>
       </div>
     </section>
