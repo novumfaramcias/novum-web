@@ -44,6 +44,7 @@ export default function App() {
           <DestacadosInfo />
           <PromocionesSlider />
           <BannersParalelos />
+          <BannerWhatsapp />
           <Sucursales />
           <GaleriaSlider />
           <Valores />
@@ -147,7 +148,7 @@ const Hero = () => {
   }, [slides.length]);
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 6000); // Duración de 6 segundos
+    const timer = setInterval(nextSlide, 6000);
     return () => clearInterval(timer);
   }, [nextSlide]);
 
@@ -214,7 +215,6 @@ const Hero = () => {
         </AnimatePresence>
       </div>
 
-      {/* Flechas de navegación lateral SOLO VISIBLES EN DESKTOP (hidden md:flex) */}
       <div className="absolute inset-0 z-20 hidden md:flex items-center justify-between px-6 pointer-events-none">
         <button
           onClick={prevSlide}
@@ -232,7 +232,6 @@ const Hero = () => {
         </button>
       </div>
 
-      {/* Indicadores inferiores (Dots) */}
       <div className="absolute bottom-6 left-0 right-0 z-20 flex justify-center gap-3">
         {slides.map((_, idx) => (
           <button
@@ -302,7 +301,7 @@ const DestacadosInfo = () => {
 
 const PromocionesSlider = () => {
   const promoImages = [
-    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-banco.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-1.webp",
     "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-2.webp",
     "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-4.webp",
     "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-3.webp",
@@ -321,7 +320,7 @@ const PromocionesSlider = () => {
   }, [promoImages.length]);
 
   useEffect(() => {
-    const timer = setInterval(next, 6000); // Duración de 6 segundos
+    const timer = setInterval(next, 6000);
     return () => clearInterval(timer);
   }, [next]);
 
@@ -354,7 +353,6 @@ const PromocionesSlider = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Flechas de navegación lateral SOLO VISIBLES EN DESKTOP (hidden md:flex) */}
           <div className="absolute inset-0 hidden md:flex items-center justify-between px-4 pointer-events-none">
             <button
               onClick={prev}
@@ -372,7 +370,6 @@ const PromocionesSlider = () => {
             </button>
           </div>
 
-          {/* Indicadores de posición (Dots) */}
           <div className="absolute bottom-2 md:bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
             {promoImages.map((_, idx) => (
               <button
@@ -396,11 +393,10 @@ const PromocionesSlider = () => {
 
 const BannersParalelos = () => {
   return (
-    <section id="banners-destacados" className="w-full bg-white pb-8 md:pb-16">
+    <section id="banners-destacados" className="w-full bg-white pb-8 md:pb-12">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
-          {/* Banner 1: Panalab */}
           <div className="overflow-hidden rounded-2xl shadow-lg border border-brand-primary/5 bg-brand-bg/10 transition-transform duration-300 hover:scale-[1.01]">
             <img
               src="https://novumfarmacias.com.ar/wp-content/uploads/2026/07/panalab.webp"
@@ -409,7 +405,6 @@ const BannersParalelos = () => {
             />
           </div>
 
-          {/* Banner 2: Bagóvit */}
           <div className="overflow-hidden rounded-2xl shadow-lg border border-brand-primary/5 bg-brand-bg/10 transition-transform duration-300 hover:scale-[1.01]">
             <img
               src="https://novumfarmacias.com.ar/wp-content/uploads/2026/07/bagovit.webp"
@@ -419,6 +414,31 @@ const BannersParalelos = () => {
           </div>
 
         </div>
+      </div>
+    </section>
+  );
+};
+
+// --- NUEVO BANNER FINO DE WHATSAPP AL 100% DE ANCHO ---
+
+const BannerWhatsapp = () => {
+  return (
+    <section id="banner-asesoramiento" className="w-full bg-brand-primary py-6 md:py-8 my-4 text-white">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+        <div className="max-w-3xl">
+          <p className="text-base sm:text-lg md:text-xl font-medium tracking-tight leading-snug">
+            ¿Buscás asesoramiento personalizado? <span className="text-brand-secondary font-semibold">Escribinos por WhatsApp</span> y te guiamos en salud, belleza y cuidado personal.
+          </p>
+        </div>
+        <a
+          href="https://wa.me/5492494288629"
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 bg-brand-secondary hover:bg-white hover:text-brand-primary text-white px-7 py-3 rounded-xl font-bold transition-all shadow-md text-xs md:text-sm uppercase tracking-wider shrink-0 font-owners"
+        >
+          <MessageCircle size={18} />
+          Escribinos por WhatsApp
+        </a>
       </div>
     </section>
   );
