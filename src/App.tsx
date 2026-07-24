@@ -142,17 +142,17 @@ const Hero = () => {
     setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   }, [slides.length]);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  };
+  }, [slides.length]);
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 5000); // Cambio cada 5 segundos
+    const timer = setInterval(nextSlide, 6000); // Duración de 6 segundos
     return () => clearInterval(timer);
   }, [nextSlide]);
 
   return (
-    <section id="inicio" className="relative h-[90vh] md:h-screen flex items-center overflow-hidden bg-black">
+    <section id="inicio" className="relative h-[90vh] md:h-screen flex items-center overflow-hidden bg-black touch-pan-y">
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
@@ -160,18 +160,25 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8 }}
-          className="absolute inset-0 z-0"
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+          onDragEnd={(_, info) => {
+            if (info.offset.x < -50) nextSlide();
+            if (info.offset.x > 50) prevSlide();
+          }}
+          className="absolute inset-0 z-0 cursor-grab active:cursor-grabbing"
         >
           <img
             src={slides[current].image}
             alt="Novum Farmacias Hero"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover pointer-events-none"
           />
-          <div className="absolute inset-0 bg-brand-primary/75 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-brand-primary/75 mix-blend-multiply pointer-events-none" />
         </motion.div>
       </AnimatePresence>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-10 pointer-events-none">
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
@@ -179,7 +186,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl"
+            className="max-w-4xl pointer-events-auto"
           >
             {slides[current].tag && (
               <span className="inline-block text-brand-secondary font-bold uppercase tracking-[0.25em] text-xs sm:text-sm mb-3">
@@ -202,24 +209,23 @@ const Hero = () => {
               className="inline-flex items-center gap-2 bg-brand-secondary text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all shadow-lg text-sm uppercase tracking-widest font-owners"
             >
               {slides[current].buttonText}
-              {slides[current].isExternal && <MessageCircle size={16} />}
             </a>
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Botones de navegación lateral */}
-      <div className="absolute inset-0 z-20 flex items-center justify-between px-3 md:px-6 pointer-events-none">
+      {/* Flechas de navegación lateral SOLO VISIBLES EN DESKTOP (hidden md:flex) */}
+      <div className="absolute inset-0 z-20 hidden md:flex items-center justify-between px-6 pointer-events-none">
         <button
           onClick={prevSlide}
-          className="pointer-events-auto w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"
+          className="pointer-events-auto w-12 h-12 rounded-full bg-black/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"
           aria-label="Anterior Slide"
         >
           <ChevronLeft size={26} />
         </button>
         <button
           onClick={nextSlide}
-          className="pointer-events-auto w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"
+          className="pointer-events-auto w-12 h-12 rounded-full bg-black/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"
           aria-label="Siguiente Slide"
         >
           <ChevronRight size={26} />
@@ -310,19 +316,19 @@ const PromocionesSlider = () => {
     setCurrent((prev) => (prev === promoImages.length - 1 ? 0 : prev + 1));
   }, [promoImages.length]);
 
-  const prev = () => {
+  const prev = useCallback(() => {
     setCurrent((prev) => (prev === 0 ? promoImages.length - 1 : prev - 1));
-  };
+  }, [promoImages.length]);
 
   useEffect(() => {
-    const timer = setInterval(next, 4000);
+    const timer = setInterval(next, 6000); // Duración de 6 segundos
     return () => clearInterval(timer);
   }, [next]);
 
   return (
     <section id="promociones" className="w-full bg-white pt-8 md:pt-16 pb-4 md:pb-8">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="relative w-full rounded-2xl overflow-hidden shadow-lg bg-brand-bg/20">
+        <div className="relative w-full rounded-2xl overflow-hidden shadow-lg bg-brand-bg/20 touch-pan-y">
           
           <AnimatePresence mode="wait">
             <motion.div
@@ -331,28 +337,35 @@ const PromocionesSlider = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="w-full flex items-center justify-center bg-[#F1EDE8]"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(_, info) => {
+                if (info.offset.x < -50) next();
+                if (info.offset.x > 50) prev();
+              }}
+              className="w-full flex items-center justify-center bg-[#F1EDE8] cursor-grab active:cursor-grabbing"
             >
               <img
                 src={promoImages[current]}
                 alt={`Promoción Novum ${current + 1}`}
-                className="w-full h-auto max-h-[450px] object-contain md:object-cover"
+                className="w-full h-auto max-h-[450px] object-contain md:object-cover pointer-events-none"
               />
             </motion.div>
           </AnimatePresence>
 
-          {/* Botones de navegación lateral */}
-          <div className="absolute inset-0 flex items-center justify-between px-2 md:px-4 pointer-events-none">
+          {/* Flechas de navegación lateral SOLO VISIBLES EN DESKTOP (hidden md:flex) */}
+          <div className="absolute inset-0 hidden md:flex items-center justify-between px-4 pointer-events-none">
             <button
               onClick={prev}
-              className="pointer-events-auto w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center hover:bg-brand-primary transition-all shadow-md"
+              className="pointer-events-auto w-10 h-10 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center hover:bg-brand-primary transition-all shadow-md"
               aria-label="Anterior promoción"
             >
               <ChevronLeft size={20} />
             </button>
             <button
               onClick={next}
-              className="pointer-events-auto w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center hover:bg-brand-primary transition-all shadow-md"
+              className="pointer-events-auto w-10 h-10 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center hover:bg-brand-primary transition-all shadow-md"
               aria-label="Siguiente promoción"
             >
               <ChevronRight size={20} />
@@ -474,7 +487,7 @@ const GaleriaSlider = () => {
   ];
   const [current, setCurrent] = useState(0);
   const next = useCallback(() => setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1)), [images.length]);
-  const prev = () => setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  const prev = useCallback(() => setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1)), [images.length]);
 
   useEffect(() => {
     const timer = setInterval(next, 5000);
@@ -484,13 +497,28 @@ const GaleriaSlider = () => {
   return (
     <section id="galeria" className="py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="relative h-[350px] md:h-[550px] rounded-[2rem] overflow-hidden shadow-2xl">
+        <div className="relative h-[350px] md:h-[550px] rounded-[2rem] overflow-hidden shadow-2xl touch-pan-y">
           <AnimatePresence mode="wait">
-            <motion.img key={current} src={images[current]} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full object-cover" />
+            <motion.img 
+              key={current} 
+              src={images[current]} 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              exit={{ opacity: 0 }} 
+              transition={{ duration: 0.8 }} 
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(_, info) => {
+                if (info.offset.x < -50) next();
+                if (info.offset.x > 50) prev();
+              }}
+              className="absolute inset-0 w-full h-full object-cover cursor-grab active:cursor-grabbing" 
+            />
           </AnimatePresence>
-          <div className="absolute inset-0 flex items-center justify-between px-4">
-            <button onClick={prev} className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"><ChevronLeft size={24} /></button>
-            <button onClick={next} className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"><ChevronRight size={24} /></button>
+          <div className="absolute inset-0 hidden md:flex items-center justify-between px-4 pointer-events-none">
+            <button onClick={prev} className="pointer-events-auto w-10 h-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"><ChevronLeft size={24} /></button>
+            <button onClick={next} className="pointer-events-auto w-10 h-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"><ChevronRight size={24} /></button>
           </div>
         </div>
       </div>
