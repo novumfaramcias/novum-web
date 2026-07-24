@@ -407,7 +407,7 @@ const BannersParalelos = () => {
 
           <div className="overflow-hidden rounded-2xl shadow-lg border border-brand-primary/5 bg-brand-bg/10 transition-transform duration-300 hover:scale-[1.01]">
             <img
-              src="https://novumfarmacias.com.ar/wp-content/uploads/2026/07/bagovit.webp"
+              src="https://novumfarmacias.com.ar/wp-content/uploads/2026/07/bagovit-productos.webp"
               alt="Destacado Bagóvit"
               className="w-full h-auto object-cover block"
             />
