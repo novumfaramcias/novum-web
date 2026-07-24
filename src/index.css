@@ -1,7 +1,25 @@
-/* 1. LOS IMPORTS SIEMPRE DEBEN IR PRIMERO QUE NADA */
+/* 1. IMPORTS Y DECLARACIÓN DE FUENTES */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
+/* Registro de archivos .otf de Owners desde public/fonts/ */
+@font-face {
+  font-family: 'Owners';
+  src: url('/fonts/Owners-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Owners';
+  src: url('/fonts/Owners-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 2. CONFIGURACIÓN DEL TEMA (TAILWIND V4) */
 @theme {
   --color-brand-primary: #004859;
   --color-brand-secondary: #BF967E;
@@ -9,9 +27,10 @@
   --color-brand-text: #333333;
   
   --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Poppins", sans-serif;
+  --font-display: "Owners", "Poppins", sans-serif;
 }
 
+/* 3. REGLAS BASE Y APLICACIÓN DE FUENTES */
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -19,8 +38,12 @@
   body {
     @apply bg-brand-bg text-brand-text font-sans antialiased;
   }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
+  /* Títulos, botones y enlaces de navegación usan Owners */
+  h1, h2, h3, h4, h5, h6,
+  nav a,
+  button,
+  .font-owners {
+    font-family: var(--font-display) !important;
   }
 }
 
