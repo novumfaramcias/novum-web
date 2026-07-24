@@ -106,24 +106,117 @@ const Navbar = () => {
 };
 
 const Hero = () => {
+  const slides = [
+    {
+      id: 1,
+      image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-1.webp",
+      hasContent: true
+    },
+    {
+      id: 2,
+      image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-3.webp",
+      hasContent: false
+    },
+    {
+      id: 3,
+      image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-2.webp",
+      hasContent: false
+    }
+  ];
+
+  const [current, setCurrent] = useState(0);
+
+  const nextSlide = useCallback(() => {
+    setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  }, [slides.length]);
+
+  const prevSlide = () => {
+    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 6000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
   return (
-    <section id="inicio" className="relative h-[90vh] md:h-screen flex items-center overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&q=80&w=2000" alt="Fondo" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-brand-primary/75 mix-blend-multiply" />
-      </div>
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl text-white font-extrabold leading-[1.1] mb-6 tracking-tight">
-            Te atendemos <br /> <span className="text-brand-secondary font-light italic">mejor.</span>
-          </h1>
-          <p className="text-lg md:text-xl text-white/70 max-w-xl mb-10 font-light leading-relaxed">Asesoramiento profesional y cercanía en Tandil.</p>
-          
-          <a href="#sucursales" className="inline-block bg-brand-secondary text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all shadow-lg text-sm uppercase tracking-widest font-owners">
-            Nuestras Sucursales
-          </a>
+    <section id="inicio" className="relative h-[90vh] md:h-screen flex items-center overflow-hidden bg-black">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8 }}
+          className="absolute inset-0 z-0"
+        >
+          <img
+            src={slides[current].image}
+            alt={`Slide ${current + 1}`}
+            className="w-full h-full object-cover"
+          />
+          {slides[current].hasContent && (
+            <div className="absolute inset-0 bg-brand-primary/75 mix-blend-multiply" />
+          )}
         </motion.div>
+      </AnimatePresence>
+
+      {/* Contenido H1 solo para el primer slide */}
+      {slides[current].hasContent && (
+        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl"
+          >
+            <h1 className="text-5xl md:text-7xl lg:text-8xl text-white font-extrabold leading-[1.1] mb-6 tracking-tight">
+              Te atendemos <br /> <span className="text-brand-secondary font-light italic">mejor.</span>
+            </h1>
+            <p className="text-lg md:text-xl text-white/70 max-w-xl mb-10 font-light leading-relaxed">
+              Asesoramiento profesional y cercanía en Tandil.
+            </p>
+
+            <a
+              href="#sucursales"
+              className="inline-block bg-brand-secondary text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all shadow-lg text-sm uppercase tracking-widest font-owners"
+            >
+              Nuestras Sucursales
+            </a>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Botones de navegación lateral */}
+      <div className="absolute inset-0 z-20 flex items-center justify-between px-4 pointer-events-none">
+        <button
+          onClick={prevSlide}
+          className="pointer-events-auto w-12 h-12 rounded-full bg-black/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"
+          aria-label="Anterior"
+        >
+          <ChevronLeft size={28} />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="pointer-events-auto w-12 h-12 rounded-full bg-black/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-brand-primary transition-all"
+          aria-label="Siguiente"
+        >
+          <ChevronRight size={28} />
+        </button>
+      </div>
+
+      {/* Indicadores inferiores (Dots) */}
+      <div className="absolute bottom-6 left-0 right-0 z-20 flex justify-center gap-3">
+        {slides.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrent(idx)}
+            className={`h-2.5 rounded-full transition-all duration-300 ${
+              current === idx ? "w-8 bg-brand-secondary" : "w-2.5 bg-white/50 hover:bg-white"
+            }`}
+            aria-label={`Ir a la diapositiva ${idx + 1}`}
+          />
+        ))}
       </div>
     </section>
   );
