@@ -139,7 +139,7 @@ const Hero = () => {
   );
 };
 
-// --- NUEVA SECCIÓN: DESTACADOS INFO (ALTURA 450px Y ESTILO DE MARCA) ---
+// --- SECCIÓN: DESTACADOS INFO (ALTURA AJUSTADA A 200px EN DESKTOP) ---
 
 const DestacadosInfo = () => {
   const items = [
@@ -161,24 +161,24 @@ const DestacadosInfo = () => {
   ];
 
   return (
-    <section id="destacados" className="w-full bg-brand-bg/40 border-y border-brand-primary/5 py-12 md:py-0 md:min-h-[450px] md:h-[450px] flex items-center justify-center">
+    <section id="destacados" className="w-full bg-brand-bg/40 border-y border-brand-primary/5 py-8 md:py-0 md:min-h-[200px] md:h-[200px] flex items-center justify-center">
       <div className="max-w-7xl mx-auto px-6 w-full h-full flex items-center">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 w-full">
           {items.map((item, idx) => (
             <div 
               key={idx} 
-              className={`flex flex-col md:flex-row items-center text-center md:text-left gap-5 px-6 lg:px-10 py-6 md:py-0 ${
+              className={`flex flex-col md:flex-row items-center text-center md:text-left gap-4 px-4 lg:px-8 py-2 md:py-0 ${
                 idx !== items.length - 1 ? "md:border-r md:border-brand-primary/10" : ""
               }`}
             >
-              <div className="p-4 rounded-2xl bg-white shadow-sm border border-brand-primary/5 text-brand-secondary shrink-0">
-                <item.icon size={36} strokeWidth={1.8} />
+              <div className="p-3.5 rounded-2xl bg-white shadow-sm border border-brand-primary/5 text-brand-secondary shrink-0">
+                <item.icon size={30} strokeWidth={1.8} />
               </div>
               <div className="flex flex-col">
-                <h3 className="text-xl lg:text-2xl font-bold text-brand-primary mb-2 tracking-tight">
+                <h3 className="text-lg lg:text-xl font-bold text-brand-primary mb-1 tracking-tight">
                   {item.title}
                 </h3>
-                <p className="text-sm lg:text-base text-brand-text/70 font-light leading-relaxed max-w-xs">
+                <p className="text-xs lg:text-sm text-brand-text/70 font-light leading-relaxed max-w-xs">
                   {item.subtitle}
                 </p>
               </div>
