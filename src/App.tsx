@@ -17,7 +17,9 @@ import {
   ShieldCheck, 
   ArrowRight, 
   ChevronLeft, 
-  ChevronRight 
+  ChevronRight,
+  CreditCard,
+  Truck
 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
@@ -39,8 +41,8 @@ export default function App() {
         <Navbar />
         <main>
           <Hero />
+          <DestacadosInfo />
           <PromocionesSlider />
-          <VideoSection />
           <Sucursales />
           <GaleriaSlider />
           <Valores />
@@ -137,6 +139,57 @@ const Hero = () => {
   );
 };
 
+// --- NUEVA SECCIÓN: DESTACADOS INFO (ALTURA 450px Y ESTILO DE MARCA) ---
+
+const DestacadosInfo = () => {
+  const items = [
+    {
+      icon: CreditCard,
+      title: "Medios de pago",
+      subtitle: "Promociones y beneficios bancarios vigentes para acompañar tu día a día."
+    },
+    {
+      icon: Truck,
+      title: "Envíos en Tandil",
+      subtitle: "Llegamos con rapidez y cuidado a cada rincón de la ciudad."
+    },
+    {
+      icon: MessageCircle,
+      title: "Atención WhatsApp",
+      subtitle: "Escribinos para recibir asesoramiento profesional inmediato."
+    }
+  ];
+
+  return (
+    <section id="destacados" className="w-full bg-brand-bg/40 border-y border-brand-primary/5 py-12 md:py-0 md:min-h-[450px] md:h-[450px] flex items-center justify-center">
+      <div className="max-w-7xl mx-auto px-6 w-full h-full flex items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 w-full">
+          {items.map((item, idx) => (
+            <div 
+              key={idx} 
+              className={`flex flex-col md:flex-row items-center text-center md:text-left gap-5 px-6 lg:px-10 py-6 md:py-0 ${
+                idx !== items.length - 1 ? "md:border-r md:border-brand-primary/10" : ""
+              }`}
+            >
+              <div className="p-4 rounded-2xl bg-white shadow-sm border border-brand-primary/5 text-brand-secondary shrink-0">
+                <item.icon size={36} strokeWidth={1.8} />
+              </div>
+              <div className="flex flex-col">
+                <h3 className="text-xl lg:text-2xl font-bold text-brand-primary mb-2 tracking-tight">
+                  {item.title}
+                </h3>
+                <p className="text-sm lg:text-base text-brand-text/70 font-light leading-relaxed max-w-xs">
+                  {item.subtitle}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // --- SLIDER DE PROMOCIONES ---
 
 const PromocionesSlider = () => {
@@ -163,7 +216,7 @@ const PromocionesSlider = () => {
   }, [next]);
 
   return (
-    <section id="promociones" className="w-full bg-white py-6 md:py-8">
+    <section id="promociones" className="w-full bg-white py-8 md:py-16">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="relative w-full rounded-2xl overflow-hidden shadow-lg bg-brand-bg/20">
           
@@ -216,33 +269,6 @@ const PromocionesSlider = () => {
             ))}
           </div>
 
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// --- NUEVA SECCIÓN DE VIDEO EN LOOP (OPTIMIZADO MÓVIL Y DESKTOP) ---
-
-const VideoSection = () => {
-  return (
-    <section id="institucional-video" className="w-full bg-white pb-8 md:pb-16">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="relative w-full rounded-2xl md:rounded-[2rem] overflow-hidden shadow-xl border border-brand-primary/5 bg-brand-primary/5">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            className="w-full h-auto max-h-[600px] object-cover block"
-          >
-            <source 
-              src="https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-tandil.mp4" 
-              type="video/mp4" 
-            />
-            Tu navegador no soporta la reproducción de video.
-          </video>
         </div>
       </div>
     </section>
