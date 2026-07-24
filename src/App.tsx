@@ -40,6 +40,7 @@ export default function App() {
         <main>
           <Hero />
           <PromocionesSlider />
+          <VideoSection />
           <Sucursales />
           <GaleriaSlider />
           <Valores />
@@ -136,7 +137,7 @@ const Hero = () => {
   );
 };
 
-// --- SLIDER DE PROMOCIONES (CON 4 IMÁGENES Y ADAPTACIÓN RESPONSIVE) ---
+// --- SLIDER DE PROMOCIONES ---
 
 const PromocionesSlider = () => {
   const promoImages = [
@@ -162,7 +163,7 @@ const PromocionesSlider = () => {
   }, [next]);
 
   return (
-    <section id="promociones" className="w-full bg-white py-6 md:py-12">
+    <section id="promociones" className="w-full bg-white py-6 md:py-8">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="relative w-full rounded-2xl overflow-hidden shadow-lg bg-brand-bg/20">
           
@@ -215,6 +216,33 @@ const PromocionesSlider = () => {
             ))}
           </div>
 
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// --- NUEVA SECCIÓN DE VIDEO EN LOOP (OPTIMIZADO MÓVIL Y DESKTOP) ---
+
+const VideoSection = () => {
+  return (
+    <section id="institucional-video" className="w-full bg-white pb-8 md:pb-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="relative w-full rounded-2xl md:rounded-[2rem] overflow-hidden shadow-xl border border-brand-primary/5 bg-brand-primary/5">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="w-full h-auto max-h-[600px] object-cover block"
+          >
+            <source 
+              src="https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-tandil.mp4" 
+              type="video/mp4" 
+            />
+            Tu navegador no soporta la reproducción de video.
+          </video>
         </div>
       </div>
     </section>
