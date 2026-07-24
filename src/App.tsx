@@ -27,12 +27,6 @@ export default function App() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
-        
-        * {
-          font-family: 'Poppins', sans-serif !important;
-        }
-        
         html, body {
           margin: 0;
           padding: 0;
@@ -126,7 +120,7 @@ const Hero = () => {
           </h1>
           <p className="text-lg md:text-xl text-white/70 max-w-xl mb-10 font-light leading-relaxed">Asesoramiento profesional y cercanía en Tandil.</p>
           
-          <a href="#sucursales" className="inline-block bg-brand-secondary text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all shadow-lg text-sm uppercase tracking-widest">
+          <a href="#sucursales" className="inline-block bg-brand-secondary text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all shadow-lg text-sm uppercase tracking-widest font-owners">
             Nuestras Sucursales
           </a>
         </motion.div>
@@ -177,7 +171,7 @@ const Sucursales = () => {
                       <MapPin size={16} className="text-brand-secondary" /> {sucursales[activeTab].address}
                     </div>
                   </div>
-                  <a href={sucursales[activeTab].whatsapp} target="_blank" rel="noreferrer" className="w-full md:w-auto flex items-center justify-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#1ebd5b] transition-all">
+                  <a href={sucursales[activeTab].whatsapp} target="_blank" rel="noreferrer" className="w-full md:w-auto flex items-center justify-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold hover:bg-[#1ebd5b] transition-all font-owners">
                     <MessageCircle size={20} /> WhatsApp
                   </a>
                 </div>
@@ -258,10 +252,9 @@ const Contacto = () => (
         ].map((sede) => (
           <a key={sede.n} href={sede.l} target="_blank" rel="noreferrer" className="bg-brand-bg/30 p-10 rounded-[2rem] border-2 border-transparent hover:border-brand-secondary hover:bg-white transition-all duration-300 flex flex-col items-center gap-8 shadow-sm group">
             <div className="h-16 md:h-20 w-full flex items-center justify-center">
-              {/* Se quitaron filtros de escala de grises y brillo para asegurar visibilidad total */}
               <img src={sede.s} alt={sede.n} className="max-w-full max-h-full object-contain" />
             </div>
-            <div className="px-5 py-2 bg-brand-primary text-white rounded-full text-[10px] font-bold uppercase tracking-widest">
+            <div className="px-5 py-2 bg-brand-primary text-white rounded-full text-[10px] font-bold uppercase tracking-widest font-owners">
               WhatsApp
             </div>
           </a>
