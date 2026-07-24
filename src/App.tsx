@@ -139,8 +139,6 @@ const Hero = () => {
   );
 };
 
-// --- SECCIÓN: DESTACADOS INFO (ALTURA AJUSTADA A 200px EN DESKTOP) ---
-
 const DestacadosInfo = () => {
   const items = [
     {
@@ -190,11 +188,16 @@ const DestacadosInfo = () => {
   );
 };
 
-// --- SLIDER DE PROMOCIONES ---
+// --- SLIDER DE PROMOCIONES (ACTUALIZADO CON LAS NUEVAS 6 IMÁGENES) ---
 
 const PromocionesSlider = () => {
   const promoImages = [
-    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-1.webp", "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-2.webp", "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-4.webp", "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-3.webp", "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-7.webp","https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-6.webp"
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-1.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-2.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-4.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-3.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-7.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-6.webp"
   ];
 
   const [current, setCurrent] = useState(0);
