@@ -43,6 +43,7 @@ export default function App() {
           <Hero />
           <DestacadosInfo />
           <PromocionesSlider />
+          <BannersParalelos />
           <Sucursales />
           <GaleriaSlider />
           <Valores />
@@ -188,13 +189,14 @@ const DestacadosInfo = () => {
   );
 };
 
-// --- SLIDER DE PROMOCIONES (ACTUALIZADO CON LAS NUEVAS 6 IMÁGENES) ---
+// --- SLIDER DE PROMOCIONES ---
 
 const PromocionesSlider = () => {
   const promoImages = [
     "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-1.webp",
     "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-2.webp",
     "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-4.webp",
+    "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-3.webp",
     "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-7.webp",
     "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-descuento-6.webp"
   ];
@@ -215,7 +217,7 @@ const PromocionesSlider = () => {
   }, [next]);
 
   return (
-    <section id="promociones" className="w-full bg-white py-8 md:py-16">
+    <section id="promociones" className="w-full bg-white pt-8 md:pt-16 pb-4 md:pb-8">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="relative w-full rounded-2xl overflow-hidden shadow-lg bg-brand-bg/20">
           
@@ -266,6 +268,38 @@ const PromocionesSlider = () => {
                 aria-label={`Ver promoción ${idx + 1}`}
               />
             ))}
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// --- NUEVA SECCIÓN: BANNERS PARALELOS (PANALAB Y BAGOVIT) ---
+
+const BannersParalelos = () => {
+  return (
+    <section id="banners-destacados" className="w-full bg-white pb-8 md:pb-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          {/* Banner 1: Panalab */}
+          <div className="overflow-hidden rounded-2xl shadow-lg border border-brand-primary/5 bg-brand-bg/10 transition-transform duration-300 hover:scale-[1.01]">
+            <img
+              src="https://novumfarmacias.com.ar/wp-content/uploads/2026/07/panalab.webp"
+              alt="Destacado Panalab"
+              className="w-full h-auto object-cover block"
+            />
+          </div>
+
+          {/* Banner 2: Bagóvit */}
+          <div className="overflow-hidden rounded-2xl shadow-lg border border-brand-primary/5 bg-brand-bg/10 transition-transform duration-300 hover:scale-[1.01]">
+            <img
+              src="https://novumfarmacias.com.ar/wp-content/uploads/2026/07/bagovit.webp"
+              alt="Destacado Bagóvit"
+              className="w-full h-auto object-cover block"
+            />
           </div>
 
         </div>
