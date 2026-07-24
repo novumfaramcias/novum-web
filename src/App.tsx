@@ -117,18 +117,22 @@ const Hero = () => {
     {
       id: 1,
       image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/novum-farmacias-1.webp",
+      tag: null,
       title: <>Te atendemos <br /> <span className="text-brand-secondary font-light italic">mejor.</span></>,
       description: "Asesoramiento profesional y cercanía en Tandil.",
       buttonText: "Nuestras Sucursales",
-      buttonLink: "#sucursales"
+      buttonLink: "#sucursales",
+      isExternal: false
     },
     {
       id: 2,
       image: "https://novumfarmacias.com.ar/wp-content/uploads/2026/07/laboratorio-magistrales.webp",
-      title: <>Laboratorio Magistral: <br /><span className="text-brand-secondary font-light italic">Fórmulas pensadas para tu bienestar</span></>,
+      tag: "Laboratorio Magistral",
+      title: <>Fórmulas pensadas <br /><span className="text-brand-secondary font-light italic">para tu bienestar.</span></>,
       description: "Elaboramos cada preparado de manera personalizada, respetando la indicación exacta de tu profesional de salud. Combinamos rigor técnico y atención cercana para darte el cuidado que necesitás.",
-      buttonText: "Nuestras Sucursales",
-      buttonLink: "#sucursales"
+      buttonText: "Escribinos",
+      buttonLink: "https://wa.me/5492494288629",
+      isExternal: true
     }
   ];
 
@@ -143,7 +147,7 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 6000);
+    const timer = setInterval(nextSlide, 5000); // Cambio cada 5 segundos
     return () => clearInterval(timer);
   }, [nextSlide]);
 
@@ -163,7 +167,6 @@ const Hero = () => {
             alt="Novum Farmacias Hero"
             className="w-full h-full object-cover"
           />
-          {/* Overlay azul petróleo #004859 idéntico al estilo previo */}
           <div className="absolute inset-0 bg-brand-primary/75 mix-blend-multiply" />
         </motion.div>
       </AnimatePresence>
@@ -178,18 +181,28 @@ const Hero = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl"
           >
+            {slides[current].tag && (
+              <span className="inline-block text-brand-secondary font-bold uppercase tracking-[0.25em] text-xs sm:text-sm mb-3">
+                {slides[current].tag}
+              </span>
+            )}
+            
             <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-white font-extrabold leading-[1.1] mb-6 tracking-tight">
               {slides[current].title}
             </h1>
+            
             <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-2xl mb-10 font-light leading-relaxed">
               {slides[current].description}
             </p>
 
             <a
               href={slides[current].buttonLink}
-              className="inline-block bg-brand-secondary text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all shadow-lg text-sm uppercase tracking-widest font-owners"
+              target={slides[current].isExternal ? "_blank" : "_self"}
+              rel={slides[current].isExternal ? "noreferrer" : undefined}
+              className="inline-flex items-center gap-2 bg-brand-secondary text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all shadow-lg text-sm uppercase tracking-widest font-owners"
             >
               {slides[current].buttonText}
+              {slides[current].isExternal && <MessageCircle size={16} />}
             </a>
           </motion.div>
         </AnimatePresence>
